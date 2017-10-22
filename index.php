@@ -128,8 +128,9 @@ if(isset($_GET['insert'])){
     $i = 1;
     $es = [];
     foreach($data as $t){
+      print_r($t);
       $es[] = $action->updateOne(
-        ['_id' => $t->_id,],
+        ['_id' => $t->_id],
         ['$set' => (array) $t]
       );
     $i++;}
