@@ -16,6 +16,20 @@ $db     = basename($_SERVER['MONGODB_URI']);
 $action = $mongo->$db->kiwots;
 $ts     = (int) str_replace('.','',microtime(true));
 
+$cursor = $action->aggregate([
+  ['$group' => ['_id' => '$status', 'count' => ['$sum' => 1]]],
+  ['$sort' => ['count' => -1]],
+]);
+$kwt = [];
+foreach ($cursor as $state) {
+  $kwt[] = [
+    'status' => $state['_id'],
+    'count'  => $state['count']
+  ];
+}
+print_r($kwt);
+
+
 /*
   Insert:
 */
