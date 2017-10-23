@@ -170,10 +170,7 @@ if(isset($_GET['insert'])){
   ]);
   $kwt = [];
   foreach ($cursor as $state) {
-    $kwt[] = [
-      'status' => $state['_id'],
-      'count'  => $state['count']
-    ];
+    $kwt[$state['_id']] = $state['count'];
   }
   $res = [
     'status'    => 'success',
